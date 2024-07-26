@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Half Circle with Percentage Arc</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #container {
+            position: relative;
+        }
+        canvas {
+            display: block;
+        }
+        #valueDisplay {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <canvas id="circleCanvas" width="300" height="300"></canvas>
+        <div id="valueDisplay">Value: <span id="valueSpan">25</span></div>
+    </div>
+
+    <script>
+        var canvas = document.getElementById('circleCanvas');
+        var ctx = canvas.getContext('2d');
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height;
+        var radius = 120;
+        var startAngle = -Math.PI;
+        var endAngle = 0;
+        var strokeColor = '#3498db';
+        var emptyFillColor = '#ecf0f1';
+        var lineWidth = 20;
+        var knobColor = '#3498db';
+        var knobRadius = 10;
+
+        function drawCircle(value) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+            ctx.strokeStyle = emptyFillColor;
+            ctx.lineWidth = lineWidth;
+            ctx.stroke();
+
+            var endAngleRad = startAngle + (endAngle - startAngle) * (value / 100);
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, startAngle, endAngleRad);
+            ctx.strokeStyle = strokeColor;
+            ctx.lineWidth = lineWidth;
+            ctx.stroke();
+
+            var knobAngle = startAngle + (endAngle - startAngle) * (value / 100);
+            var knobX = centerX + radius * Math.cos(knobAngle);
+            var knobY = centerY + radius * Math.sin(knobAngle);
+
+            ctx.beginPath();
+            ctx.arc(knobX, knobY, knobRadius, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fillStyle = knobColor;
+            ctx.fill();
+
+            document.getElementById('valueSpan').textContent = value;
+        }
+
+        window.onload = function() {
+            drawCircle(25); 
+        };
+    </script>
+</body>
+</html>

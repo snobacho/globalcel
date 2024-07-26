@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <style>
+    #all-countries-slider .all-countries-slider-filtr {
+            cursor: pointer;
+            width: 101px;
+            border: 1px solid #1D6ADA;
+            border-radius: 20px;
+            color: #1D6ADA;
+            height: 29px;
+            display: grid;
+            place-items: center;
+            font-family: "Poppins", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        .all-countries-slider-filtr.active {
+            color: white !important;
+            background-color: #1D6ADA;
+        }
+    </style>
+</head>
+<body>
+    <div id="all-countries-slider" class="owl-carousel">
+        <div class="all-countries-slider-filtr">Georgia +</div>
+        <div class="all-countries-slider-filtr">Asia +</div>
+        <div class="all-countries-slider-filtr">Africa +</div>
+        <div class="all-countries-slider-filtr">USA +</div>
+        <div class="all-countries-slider-filtr">Europe +</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#all-countries-slider').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: true,
+                autoplay: false,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    350: {
+                        items: 3.2
+                    },
+                    600: {
+                        items: 6
+                    },
+                    1000: {
+                        items: 10,
+                        margin: 10
+                    }
+                }
+            });
+
+            $('#all-countries-slider').on('click', '.all-countries-slider-filtr', function() {
+                var $this = $(this);
+                $this.toggleClass('active');
+            });
+        });
+    </script>
+</body>
+</html>
